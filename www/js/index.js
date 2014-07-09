@@ -20,7 +20,7 @@ var app = {
     // denotes whether we are within a mobile device (otherwise we're in a browser)
     iAmPhoneGap: false,
     // how long should we wait for PhoneGap to say the device is ready.
-    howPatientAreWe: 3000,
+    howPatientAreWe: 5000,
     // id of the 'too_impatient' timeout
     timeoutID: null,
     // id of the 'impatience_remaining' interval reporting.
@@ -67,16 +67,25 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        $("#" + id).removeClass("glyphicon-refresh-animate");
+        $("#" + id).remove();
+        $("#btn-test").text("Tester");
+
+        //var parentElement = document.getElementById(id);
+        //var listeningElement = parentElement.querySelector('.listening');
+        //var receivedElement = parentElement.querySelector('.received');
+
+        //listeningElement.setAttribute('style', 'display:none;');
+        //receivedElement.setAttribute('style', 'display:block;');
 
         // clear the "areWeThereYet" reporting.
         window.clearInterval(app.impatienceProgressIntervalID);
 
         console.log('Received Event: ' + id);
+
+        //if (app.iAmPhoneGap) {
+        //    $.getScript("http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js");
+        //}
     }
 };
